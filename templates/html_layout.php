@@ -1,12 +1,4 @@
-<!doctype html>
-<html lang="fr">
-<head>
-  <meta charset="utf-8">
-  <title>Titre de la page</title>
-  <link rel="stylesheet" href="style.css">
-  <!-- <script src="script.js"></script> -->
-</head>
-<body>
- 
-</body>
-</html>
+<?php
+include_once './templates/includes/html_header.inc.php';
+
+include_once './templates/includes/html_footer.inc.php';
