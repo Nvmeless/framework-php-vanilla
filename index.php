@@ -2,6 +2,11 @@
 <?php
 
 require_once './configs/bootstrap.php';
-dd($globalConfigs);
+// ob_start();
+if(isset($_GET["page"])){
+    fromInc($_GET['page']);
+}
 
-$test + 4;
+$pageContent = ob_get_clean();
+include "./templates/layouts/". $_GET["layout"] .".layout.php";
+
