@@ -4,7 +4,7 @@
 require_once './configs/bootstrap.php';
 // ob_start();
 if(isset($_GET["page"])){
-    fromInc($_GET['paage']);
+    fromInc($_GET['pazazage']);
 }
 //hello
 $pageContent = ob_get_clean();
