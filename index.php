@@ -6,7 +6,7 @@ require_once './configs/bootstrap.php';
 if(isset($_GET["page"])){
     fromInc($_GET['page']);
 }
-
+//hello
 $pageContent = ob_get_clean();
 include "./templates/layouts/". $_GET["layout"] .".layout.php";
 
