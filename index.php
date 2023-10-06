@@ -4,9 +4,15 @@
 require_once './configs/bootstrap.php';
 // ob_start();
 if(isset($_GET["page"])){
-    fromInc($_GET['pazazage']);
+    fromInc($_GET['page']);
 }
 //hello
-$pageContent = ob_get_clean();
+$pageContent = [
+    "html" => ob_get_clean()
+];
+
+if(isset($_GET["layout"])){
 include "./templates/layouts/". $_GET["layout"] .".layout.php";
+}
+
 
