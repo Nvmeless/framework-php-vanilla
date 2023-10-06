@@ -1,8 +1,8 @@
-'Nvmeless/framework-php-vanilla'
 <?php
 
 require_once './configs/bootstrap.php';
-// ob_start();
+ob_start();
+
 if(isset($_GET["page"])){
     fromInc($_GET['page']);
 }
