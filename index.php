@@ -9,6 +9,7 @@ if(isset($_GET["page"])){
 //hello
 $pageContent = [
     "html" => ob_get_clean()
+    "data" => []
 ];
 
 if(isset($_GET["layout"])){
