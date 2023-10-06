@@ -7,6 +7,3 @@
   <!-- <script src="script.js"></script> -->
 </head>
 <body>
- 
-</body>
-</html>
