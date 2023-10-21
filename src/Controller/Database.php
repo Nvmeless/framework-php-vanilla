@@ -4,17 +4,18 @@ namespace Jin\Controller;
 
 class Database {
 
-    private $table;
-    private $format;
-    private $method;
-    private $data;
+    protected $table;
+    protected $format;
+    protected $method;
+    protected $data;
+    protected $filters;
+
     public function table($tablename)
     {
         //Verify if table exist
         $this->table = $tablename;
         return $this;
     }
-
     public function get($data){
         $this->method = "get";
         return $this;
@@ -67,6 +68,35 @@ class Database {
         return $this->table;
     }
     // public payload
+    public function getFilters($dataKey = 'filters'){
+        $res = "";
+        if(isset($this->data[$dataKey])){
+            $this->filters = $this->data[$dataKey];
+            $filters = [];
+            foreach ($this->filters as  $filter) {
+                $col = array_keys($filter)[0];
+                $val = $filter[$col];
+                if(is_string($val)){
+                    $val = '"'.$val.'"';
+                } 
+                if($val === true){
+                    $val = 'TRUE';
+                }
+                if($val === false){
+                    $val = 'FALSE';
+                }
+                $filters[] = "$col = $val";
+            }
+            foreach ($filters as $key => $value) {
+                    $res .= $value;
+                   if(!(count($filters) == ($key + 1 ))){
+                        $res .= " AND ";
+                    }
+            }
+        }
+        return $res;
+        
+    }
     public function qb(){
 
     }

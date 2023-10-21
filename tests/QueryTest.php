@@ -18,14 +18,47 @@ class QueryTest extends TestCase{
         $database->table($tableName);
         $this->assertEquals($tableName, $database->getTable());
     }
-    public function testQueryFilters(){
+    public function testQueryFilter(){
         $database = new Database( );
         $payload = [
           'filters' => [
             ["column" => "value"]
           ]  
           ];
+          $database->post($payload);
           $this->assertEquals('column = "value"', $database->getFilters());
     }
+        public function testQueryFilters(){
+        $database = new Database( );
+        $payload = [
+          'filters' => [
+            ["column" => "value"],
+            ["column" => true],
+
+          ]  
+          ];
+          $database->post($payload);
+          $this->assertEquals('column = "value" AND column = TRUE', $database->getFilters());
+    }
+    public function testQueryTypedFilters(){
+        $database = new Database( );
+        $payload = [
+          'filters' => [
+            ["column" => "value"],
+            ["column" => true],
+            ["column" => FALSE],
+            ["column" => 2],
+
+          ]  
+          ];
+          $database->post($payload);
+          $this->assertEquals('column = "value" AND column = TRUE AND column = FALSE AND column = 2', $database->getFilters());
+    }
+    public function testQueryEmptyFilters(){
+        $database = new Database( );
+          $database->post([]);
+          $this->assertEquals('', $database->getFilters());
+    }
+
     
 }
