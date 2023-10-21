@@ -12,6 +12,7 @@ class Database {
     {
         //Verify if table exist
         $this->table = $tablename;
+        return $this;
     }
 
     public function get($data){
@@ -61,6 +62,9 @@ class Database {
                 # code...
                 break;
         }
+    }
+    public function getTable(){
+        return $this->table;
     }
     // public payload
     public function qb(){

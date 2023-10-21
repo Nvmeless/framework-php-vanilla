@@ -11,5 +11,21 @@ class QueryTest extends TestCase{
         $this->assertEquals('soft-delete', $database->delete([])->getMethod());
         $this->assertEquals('delete', $database->delete([],true)->getMethod());
     }
+
+    public function testTable(){
+        $database = new Database();
+        $tableName = "table";
+        $database->table($tableName);
+        $this->assertEquals($tableName, $database->getTable());
+    }
+    public function testQueryFilters(){
+        $database = new Database( );
+        $payload = [
+          'filters' => [
+            ["column" => "value"]
+          ]  
+          ];
+          $this->assertEquals('column = "value"', $database->getFilters());
+    }
     
 }
