@@ -1,4 +1,5 @@
 <?php 
+//Deprecated 
 require_once "./src/dbConnect.php";
 
 function queryBuilder($method, $table, ...$payload){
