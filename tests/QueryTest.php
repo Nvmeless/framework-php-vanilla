@@ -11,6 +11,5 @@ class QueryTest extends TestCase{
         $this->assertEquals('soft-delete', $database->delete([])->getMethod());
         $this->assertEquals('delete', $database->delete([],true)->getMethod());
     }
-    public function test
     
 }
