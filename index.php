@@ -1,5 +1,5 @@
 <?php
-
+require './vendor/autoload.php';
 require_once './configs/bootstrap.php';
 ob_start();
 
