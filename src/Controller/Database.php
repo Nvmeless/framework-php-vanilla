@@ -108,23 +108,42 @@ class Database {
             $this->setParams($dataKey, $this->getData()[$dataKey]);
             $params = [];
             foreach ($this->getParams($dataKey) as $key => $param) {
-               $params[] = "$key = $param"; 
+                $param = $this->makeSqlValue($param);
+                $params[] = "$key = $param"; 
             }
             $res .= $this->makeListing($params, $separator);
         }
         return $res;
     }
 
-    public function makeListing($list = [], $separator = "," ){
-        $res = "";
+    public function makeSqlValue($raw){
+        if(is_string($raw)){
+            $raw = '"' . $raw .'"';
+        }
+        if($raw === true){
+            $raw = 'TRUE';
+        }
+        if($raw === false){
+            $raw = 'FALSE';
+        }
+        return $raw;
+    }
+
+    public function makeListing($list = [], $separator = ",",$prefix = "" , $suffix = "",$sqlVal= false, $encapsuler ="" ){
+        $res = $prefix;
         $index = 0;
         foreach ($list as $value) {
-            $res .= $value;
+            if($sqlVal){
+                $res .= $this->makeSqlValue($value);
+            } else {
+                $res .= $encapsuler . $value . $encapsuler;
+            }
             if(!(count($list) == ($index + 1))){
                 $res .= " " . $separator . " ";
             }
             $index += 1;
         }
+        $res .= $suffix;
         return $res;
     }
 

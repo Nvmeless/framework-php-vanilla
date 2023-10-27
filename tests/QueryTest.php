@@ -24,7 +24,7 @@ class QueryTest extends TestCase {
     }
         public function testParamsListing(){
             $db = new Database();
-            $this->assertEquals('name = "Delaistre" AND age = 26', $db->get(['filters' => ["name" => "Delaistre", "age" => 26]])->parseParams());
+            $this->assertEquals('`name` = "Delaistre" AND `age` = 26', $db->get(['filters' => ["name" => "Delaistre", "age" => 26]])->parseParams());
  
     }
 }
