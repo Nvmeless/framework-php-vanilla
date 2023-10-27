@@ -8,10 +8,14 @@ class Database {
     protected $format;
     protected $method;
     protected $data;
-    protected $filters;
     protected $query;
+
     protected $lastResult;
     protected $connexion;
+    
+    private $availableKeys = ["post", "filters"]; 
+    private $post;
+    private $filters;
     public function __construct($connexion = null) {
         $this->connexion = $connexion;
     }
@@ -21,6 +25,17 @@ class Database {
         $this->table = $tablename;
         return $this;
     }
+ 
+    //set the Method property
+    public function setMethod($method){
+        $this->method = $method;
+        return $this;
+    }
+
+    public function getData(){
+        return $this->data;
+    }
+
     public function get($data){
         $this->method = "get";
         $this->makeQuery($data);
@@ -54,19 +69,19 @@ class Database {
     }
     private function setFormat(){
         $format = "";
-        switch ($this->method) {
+        switch($this->getMethod()){
             case 'post':
                 $format = "INSERT INTO %s %s VALUES %s ;";
                 break;
-            case 'soft-delete':
             case 'update':
+            case 'soft-delete':
                 $format = "UPDATE %s SET %s WHERE %s ;";
                 break;
             case 'delete':
-                $format = "DELETE FROM %s WHERE %s ;";
+                $format = "DELETE FROM %s WHERE %s;";
                 break;
             case 'get':
-            default:
+            default: 
                 $format = "SELECT %s FROM %s WHERE %s ;";
                 break;
         }
@@ -78,12 +93,15 @@ class Database {
     public function getQuery(){
         return $this->query;
     }
+    private function setQuery($query){
+        $this->query = $query;
+        return $this;
+    }
+
     public function getTable(){
         return $this->table;
     }
-    public function setColumns(){
 
-    }
     //Change Value to SQL Acceptable value
     public function makeSqlValue($raw){
                 if(is_string($raw)){
@@ -109,27 +127,26 @@ class Database {
             }
             
             if(!(count($list) == ($index + 1 ))){
-                $res .= $separator;
+                 $res .= " " . $separator . " ";
             }
             $index += 1;
         }
         $res .= $suffix;
         return $res;
     }
-    public function parseParams($dataKey = 'filters', $separatedBy = " AND "){
+    public function parseParams($dataKey = 'filters', $separator = "AND"){
         $res = "1";
-        if(isset($this->data[$dataKey])){
+        if(isset($this->getData()[$dataKey])){
             $res = "";
-            $this->filters = $this->data[$dataKey];
-            $filters = [];
-            foreach ($this->filters as $key => $filter) {
-                $filter  = $this->makeSqlValue($filter);
-                $filters[] = "$key = $filter";
+            $this->setParams($dataKey, $this->getData()[$dataKey]);
+            $params = [];
+            foreach ($this->getParams($dataKey) as $key => $param) {
+                $param = $this->makeSqlValue($param);
+                $params[] = "`$key` = $param"; 
             }
-            $res .= $this->makeListing($filters, $separatedBy);
+            $res .= $this->makeListing($params, $separator);
         }
         return $res;
-        
     }
     private function build(){
 
@@ -138,7 +155,7 @@ class Database {
                 $query = "";
 
                 if(isset($this->data['post'])){
-                    $columns = $this->makeListing(array_keys($this->data["post"]), ',', '(',')');
+                    $columns = $this->makeListing(array_keys($this->data["post"]), ',', '(',')', false, "`");
                     $values = $this->makeListing($this->data['post'], ',', '(',')',true);
                     $query = sprintf($this->getFormat(), $this->table, $columns, $values);
                 }
@@ -148,7 +165,7 @@ class Database {
                 $query = sprintf($this->getFormat(), $this->table, $this->parseParams('post', ' , '), $this->parseParams());
                 break;
             case 'soft-delete':
-                $query = sprintf($this->getFormat(), $this->table, "status = \"offline\"", $this->parseParams());
+                $query = sprintf($this->getFormat(), $this->table, "`status` = \"offline\"", $this->parseParams());
                 break;
             case 'delete':
                 $query = sprintf($this->getFormat(), $this->table, $this->parseParams());
@@ -156,7 +173,7 @@ class Database {
             case 'get':
                 $colums = "*";
                 if(isset($this->data['cols'])){
-                    $colums= $this->makeListing($this->data['cols'],',');
+                    $colums= $this->makeListing($this->data['cols'],',',"","",false, '`');
                 }
                 $query = sprintf($this->getFormat(),$colums, $this->table, $this->parseParams());
                 break;
@@ -166,7 +183,19 @@ class Database {
                 
                 break;
         }
-        $this->query = $query;
+        $this->setQuery($query);
+    }
+    private function setParams($key, $data){
+        if(in_array($key, $this->availableKeys)){
+            $this->$key =  $data;
+            return $this;
+        }
+    }
+    public function getParams($key){
+        if(in_array($key, $this->availableKeys)){
+            return $this->$key;
+        }
+        
     }
     public function do(){
         $this->lastResult = $this->connexion->query($this->getQuery());
