@@ -25,6 +25,29 @@ class QueryTest extends TestCase {
         public function testParamsListing(){
             $db = new Database();
             $this->assertEquals('`name` = "Delaistre" AND `age` = 26', $db->get(['filters' => ["name" => "Delaistre", "age" => 26]])->parseParams());
+            $this->assertEquals('`name` = "Delaistre" AND `age` = 26', $db->get(['filters' => ["name" => "Delaistre", "age" => 26]])->parseParams());
+            $this->assertEquals('`name` = "Delaistre" AND `age` = 26', $db->get(['filters' => ["name" => "Delaistre", "age" => 26]])->parseParams());
+            $this->assertEquals('`name` = "Delaistre" AND `age` = 26', $db->get(['filters' => ["name" => "Delaistre", "age" => 26]])->parseParams());
  
+    }
+    public function testTable(){
+        $database = new Database();
+        $tableName = "table";
+        $database->table($tableName);
+        $this->assertEquals($tableName, $database->getTable());
+    }
+        public function testQueryTypedFilters(){
+        $database = new Database( );
+        $payload = [
+          'filters' => [
+            "column" => "value",
+            "column2" => true,
+            "column3" => FALSE,
+            "column4" => 2,
+
+          ]  
+          ];
+          $database->post($payload);
+          $this->assertEquals('`column` = "value" AND `column2` = TRUE AND `column3` = FALSE AND `column4` = 2', $database->parseParams());
     }
 }

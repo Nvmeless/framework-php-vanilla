@@ -109,7 +109,7 @@ class Database {
             $params = [];
             foreach ($this->getParams($dataKey) as $key => $param) {
                 $param = $this->makeSqlValue($param);
-                $params[] = "$key = $param"; 
+                $params[] = "`$key` = $param"; 
             }
             $res .= $this->makeListing($params, $separator);
         }
@@ -164,8 +164,6 @@ class Database {
         $query = "";
         switch($this->getMethod()){
             case 'update':
-                // $format = "UPDATE %s SET %s WHERE %s ;";
-
                 $query = sprintf($this->getFormat(), $this->getTable(), $this->parseParams('post'), $this->parseParams());
                 break;
             
