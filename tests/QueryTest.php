@@ -25,9 +25,7 @@ class QueryTest extends TestCase {
         public function testParamsListing(){
             $db = new Database();
             $this->assertEquals('`name` = "Delaistre" AND `age` = 26', $db->get(['filters' => ["name" => "Delaistre", "age" => 26]])->parseParams());
-            $this->assertEquals('`name` = "Delaistre" AND `age` = 26', $db->get(['filters' => ["name" => "Delaistre", "age" => 26]])->parseParams());
-            $this->assertEquals('`name` = "Delaistre" AND `age` = 26', $db->get(['filters' => ["name" => "Delaistre", "age" => 26]])->parseParams());
-            $this->assertEquals('`name` = "Delaistre" AND `age` = 26', $db->get(['filters' => ["name" => "Delaistre", "age" => 26]])->parseParams());
+            $this->assertEquals('`name` = "Delaistre" AND `age` = 26', $db->get(['post' => ["name" => "Delaistre", "age" => 26]])->parseParams("post"));
  
     }
     public function testTable(){
@@ -49,5 +47,99 @@ class QueryTest extends TestCase {
           ];
           $database->post($payload);
           $this->assertEquals('`column` = "value" AND `column2` = TRUE AND `column3` = FALSE AND `column4` = 2', $database->parseParams());
+    }
+    public function testUpdate(){
+        $database = new Database( );
+
+        $query = $database->table("Table")->update([
+            'post' => [
+                "name" => "Thierry",
+                "surname" => 2
+            ], "filters" => [
+                "col" => "ent",
+                "cola" => "ent"
+            ]])->getQuery();
+        $this->assertEquals('UPDATE Table SET `name` = "Thierry" , `surname` = 2 WHERE `col` = "ent" AND `cola` = "ent" ;', $query);
+    }
+    public function testUpdateNoArgs(){
+        $database = new Database( );
+
+        $query = $database->table("Table")->update([
+            'post' => [
+                "name" => "Thierry"
+            ],
+            "filters" => [
+                "col" => "ent"
+            ]])->getQuery();
+        $this->assertEquals('UPDATE Table SET name = "Thierry" WHERE `col` = "ent" ;', $query);
+    }
+    public function testSoftDelete(){
+        $database = new Database( );
+
+        $query = $database->table("Table")->delete([
+            'post' => [
+                "name" => "Thierry",
+                "surname" => 2
+            ], 
+            "filters" => [
+                "col" => "ent",
+                "cola" => "ent"
+            ]])->getQuery();
+        $this->assertEquals('UPDATE Table SET `status` = "offline" WHERE `col` = "ent" AND `cola` = "ent" ;', $query);
+    }
+    public function testSoftDeleteNoArgs(){
+        $database = new Database( );
+
+        $query = $database->table("Table")->delete([
+            'post' => [
+                "name" => "Thierry",
+            ], 
+            "filters" => [
+                "col" => "ent",
+            ]])->getQuery();
+        $this->assertEquals('UPDATE Table SET `status` = "offline" WHERE `col` = "ent" ;', $query);
+    }
+    public function testGetWithoutColums(){
+        $database = new Database( );
+
+        $query = $database->table("Table")->get([
+            'post' => [
+                "name" => "Thierry",
+                "surname" => 2
+            ], "filters" => [
+                "col" => "ent",
+                "cola" => "ent"
+            ]])->getQuery();
+        $this->assertEquals('SELECT * FROM Table WHERE `col` = "ent" AND `cola` = "ent" ;', $query);
+    }
+    public function testGetWithoutFilters(){
+        $database = new Database( );
+
+        $query = $database->table("Table")->get([
+        'post' => [
+            "name" => "Thierry",
+            "surname" => 2
+        ], ])->getQuery();
+        $this->assertEquals('SELECT * FROM Table WHERE 1 ;', $query);
+    }
+    public function testGetWithColumns(){
+        $database = new Database( );
+
+        $query = $database->table("Table")->get([
+        'cols' => [
+            "name", "id", "status"
+        ], ])->getQuery();
+        $this->assertEquals('SELECT `name`,`id`,`status` FROM Table WHERE 1 ;', $query);
+    }
+
+    public function testPost(){
+        $database = new Database( );
+
+        $query = $database->table("Table")->post([
+        'post' => [
+            "name" => "Thierry",
+            "surname" => 2
+        ], ])->getQuery();
+        $this->assertEquals('INSERT INTO Table (`name`,`surname`) VALUES ("Thierry",2) ;', $query);
     }
 }
