@@ -6,6 +6,11 @@ class Database {
     private $method;
     private $data;
     private $format;
+    private $query;
+
+    private $availableKeys = ["post", "filters"]; 
+    private $post;
+    private $filters;
     public function __construct(){
 
 
@@ -96,7 +101,7 @@ class Database {
 
 
     //Parse parameter 
-    public function parseParams($dataKey = 'filters'){
+    public function parseParams($dataKey = 'filters', $separator = "AND"){
         $res = "";
         if(isset($this->getData()[$dataKey])){
             $res = "";
@@ -105,18 +110,18 @@ class Database {
             foreach ($this->getParams($dataKey) as $key => $param) {
                $params[] = "$key = $param"; 
             }
-            $res .= $this->makeListing($params);
+            $res .= $this->makeListing($params, $separator);
         }
         return $res;
     }
 
-    public function makeListing($list = [] ){
+    public function makeListing($list = [], $separator = "," ){
         $res = "";
         $index = 0;
         foreach ($list as $value) {
             $res .= $value;
             if(!(count($list) == ($index + 1))){
-                $res .= " , ";
+                $res .= " " . $separator . " ";
             }
             $index += 1;
         }
@@ -124,11 +129,16 @@ class Database {
     }
 
     private function setParams($key, $data){
-        $this->$key =  $data;
-        return $this;
+        if(in_array($key, $this->availableKeys)){
+            $this->$key =  $data;
+            return $this;
+        }
     }
     public function getParams($key){
-        return $this->$key;
+        if(in_array($key, $this->availableKeys)){
+            return $this->$key;
+        }
+        
     }
 
     private function build(){

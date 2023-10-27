@@ -1,0 +1,273 @@
+PHPUnit 10.4.1 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.2.11
+Configuration: /Users/Jin/Sites/myOwnFramework/phpunit.xml
+Random Seed:   1698402697
+
+RF                                                                  2 / 2 (100%)
+
+Time: 00:00.015, Memory: 8.00 MB
+
+There was 1 PHPUnit test runner deprecation:
+
+1) Your XML configuration validates against a deprecated schema. Migrate your XML configuration using "--migrate-configuration"!
+
+--
+
+There was 1 failure:
+
+1) QueryTest::testMethod
+Failed asserting that two strings are equal.
+--- Expected
++++ Actual
+@@ @@
+-'got'
++'get'
+
+/Users/Jin/Sites/myOwnFramework/tests/QueryTest.php:8
+
+--
+
+There was 1 risky test:
+
+1) QueryTest::testFormat
+This test did not perform any assertions
+
+/Users/Jin/Sites/myOwnFramework/tests/QueryTest.php:12
+
+FAILURES!
+Tests: 2, Assertions: 1, Failures: 1, Deprecations: 2, Risky: 1.
+PHPUnit 10.4.1 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.2.11
+Configuration: /Users/Jin/Sites/myOwnFramework/phpunit.xml
+Random Seed:   1698402729
+
+FR                                                                  2 / 2 (100%)
+
+Time: 00:00.015, Memory: 8.00 MB
+
+There was 1 PHPUnit test runner deprecation:
+
+1) Your XML configuration validates against a deprecated schema. Migrate your XML configuration using "--migrate-configuration"!
+
+--
+
+There was 1 failure:
+
+1) QueryTest::testMethod
+Failed asserting that two strings are equal.
+--- Expected
++++ Actual
+@@ @@
+-'got'
++'get'
+
+/Users/Jin/Sites/myOwnFramework/tests/QueryTest.php:8
+
+--
+
+There was 1 risky test:
+
+1) QueryTest::testFormat
+This test did not perform any assertions
+
+/Users/Jin/Sites/myOwnFramework/tests/QueryTest.php:12
+
+FAILURES!
+Tests: 2, Assertions: 1, Failures: 1, Deprecations: 2, Risky: 1.
+PHPUnit 10.4.1 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.2.11
+Configuration: /Users/Jin/Sites/myOwnFramework/phpunit.xml
+Random Seed:   1698402735
+
+RF                                                                  2 / 2 (100%)
+
+Time: 00:00.012, Memory: 8.00 MB
+
+There was 1 PHPUnit test runner deprecation:
+
+1) Your XML configuration validates against a deprecated schema. Migrate your XML configuration using "--migrate-configuration"!
+
+--
+
+There was 1 failure:
+
+1) QueryTest::testMethod
+Failed asserting that two strings are equal.
+--- Expected
++++ Actual
+@@ @@
+-'got'
++'get'
+
+/Users/Jin/Sites/myOwnFramework/tests/QueryTest.php:8
+
+--
+
+There was 1 risky test:
+
+1) QueryTest::testFormat
+This test did not perform any assertions
+
+/Users/Jin/Sites/myOwnFramework/tests/QueryTest.php:12
+
+FAILURES!
+Tests: 2, Assertions: 1, Failures: 1, Deprecations: 2, Risky: 1.
+PHPUnit 10.4.1 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.2.11
+Configuration: /Users/Jin/Sites/myOwnFramework/phpunit.xml
+Random Seed:   1698402738
+
+RF                                                                  2 / 2 (100%)
+
+Time: 00:00.004, Memory: 8.00 MB
+
+There was 1 PHPUnit test runner deprecation:
+
+1) Your XML configuration validates against a deprecated schema. Migrate your XML configuration using "--migrate-configuration"!
+
+--
+
+There was 1 failure:
+
+1) QueryTest::testMethod
+Failed asserting that two strings are equal.
+--- Expected
++++ Actual
+@@ @@
+-'got'
++'get'
+
+/Users/Jin/Sites/myOwnFramework/tests/QueryTest.php:8
+
+--
+
+There was 1 risky test:
+
+1) QueryTest::testFormat
+This test did not perform any assertions
+
+/Users/Jin/Sites/myOwnFramework/tests/QueryTest.php:12
+
+FAILURES!
+Tests: 2, Assertions: 1, Failures: 1, Deprecations: 2, Risky: 1.
+PHPUnit 10.4.1 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.2.11
+Configuration: /Users/Jin/Sites/myOwnFramework/phpunit.xml
+Random Seed:   1698402739
+
+FR                                                                  2 / 2 (100%)
+
+Time: 00:00.004, Memory: 8.00 MB
+
+There was 1 PHPUnit test runner deprecation:
+
+1) Your XML configuration validates against a deprecated schema. Migrate your XML configuration using "--migrate-configuration"!
+
+--
+
+There was 1 failure:
+
+1) QueryTest::testMethod
+Failed asserting that two strings are equal.
+--- Expected
++++ Actual
+@@ @@
+-'got'
++'get'
+
+/Users/Jin/Sites/myOwnFramework/tests/QueryTest.php:8
+
+--
+
+There was 1 risky test:
+
+1) QueryTest::testFormat
+This test did not perform any assertions
+
+/Users/Jin/Sites/myOwnFramework/tests/QueryTest.php:12
+
+FAILURES!
+Tests: 2, Assertions: 1, Failures: 1, Deprecations: 2, Risky: 1.
+PHPUnit 10.4.1 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.2.11
+Configuration: /Users/Jin/Sites/myOwnFramework/phpunit.xml
+Random Seed:   1698402740
+
+RF                                                                  2 / 2 (100%)
+
+Time: 00:00.007, Memory: 8.00 MB
+
+There was 1 PHPUnit test runner deprecation:
+
+1) Your XML configuration validates against a deprecated schema. Migrate your XML configuration using "--migrate-configuration"!
+
+--
+
+There was 1 failure:
+
+1) QueryTest::testMethod
+Failed asserting that two strings are equal.
+--- Expected
++++ Actual
+@@ @@
+-'got'
++'get'
+
+/Users/Jin/Sites/myOwnFramework/tests/QueryTest.php:8
+
+--
+
+There was 1 risky test:
+
+1) QueryTest::testFormat
+This test did not perform any assertions
+
+/Users/Jin/Sites/myOwnFramework/tests/QueryTest.php:12
+
+FAILURES!
+Tests: 2, Assertions: 1, Failures: 1, Deprecations: 2, Risky: 1.
+PHPUnit 10.4.1 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.2.11
+Configuration: /Users/Jin/Sites/myOwnFramework/phpunit.xml
+Random Seed:   1698402741
+
+FR                                                                  2 / 2 (100%)
+
+Time: 00:00.005, Memory: 8.00 MB
+
+There was 1 PHPUnit test runner deprecation:
+
+1) Your XML configuration validates against a deprecated schema. Migrate your XML configuration using "--migrate-configuration"!
+
+--
+
+There was 1 failure:
+
+1) QueryTest::testMethod
+Failed asserting that two strings are equal.
+--- Expected
++++ Actual
+@@ @@
+-'got'
++'get'
+
+/Users/Jin/Sites/myOwnFramework/tests/QueryTest.php:8
+
+--
+
+There was 1 risky test:
+
+1) QueryTest::testFormat
+This test did not perform any assertions
+
+/Users/Jin/Sites/myOwnFramework/tests/QueryTest.php:12
+
+FAILURES!
+Tests: 2, Assertions: 1, Failures: 1, Deprecations: 2, Risky: 1.

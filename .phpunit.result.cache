@@ -1,1 +1,1 @@
-{"version":1,"defects":{"QueryTest::testMethod":5},"times":{"QueryTest::testMethod":0.002}}
+{"version":1,"defects":{"QueryTest::testMethod":7,"QueryTest::testFormat":5},"times":{"QueryTest::testMethod":0.004,"QueryTest::testFormat":0}}
